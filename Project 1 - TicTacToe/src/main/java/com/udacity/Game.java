@@ -154,57 +154,58 @@ public class Game {
         String oWins = "O wins";
         String tie = "Tie";
         //Student code goes here ...
-
-        if(grid[0][0]==grid[1][0]&&grid[1][0]==grid[2][0]){
-            if(grid[0][0] == 'x'){
-                result = xWins;
-            } else if(grid[0][0] == 'o'){
-                result = oWins;
+        if (freeSpots<=5) {
+            if (grid[0][0] == grid[1][0] && grid[1][0] == grid[2][0]) {
+                if (grid[0][0] == 'x') {
+                    result = xWins;
+                } else if (grid[0][0] == 'o') {
+                    result = oWins;
+                }
+            } else if (grid[0][1] == grid[1][1] && grid[1][1] == grid[2][1]) {
+                if (grid[0][1] == 'x') {
+                    result = xWins;
+                } else if (grid[0][1] == 'o') {
+                    result = oWins;
+                }
+            } else if (grid[0][2] == grid[1][2] && grid[1][2] == grid[2][2]) {
+                if (grid[0][2] == 'x') {
+                    result = xWins;
+                } else if (grid[0][2] == 'o') {
+                    result = oWins;
+                }
+            } else if (grid[0][0] == grid[0][1] && grid[0][1] == grid[0][2]) {
+                if (grid[0][0] == 'x') {
+                    result = xWins;
+                } else if (grid[0][0] == 'o') {
+                    result = oWins;
+                }
+            } else if (grid[1][0] == grid[1][1] && grid[1][1] == grid[1][2]) {
+                if (grid[1][0] == 'x') {
+                    result = xWins;
+                } else if (grid[1][0] == 'o') {
+                    result = oWins;
+                }
+            } else if (grid[2][0] == grid[2][1] && grid[2][1] == grid[2][2]) {
+                if (grid[2][0] == 'x') {
+                    result = xWins;
+                } else if (grid[2][0] == 'o') {
+                    result = oWins;
+                }
+            } else if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]) {
+                if (grid[0][0] == 'x') {
+                    result = xWins;
+                } else if (grid[0][0] == 'o') {
+                    result = oWins;
+                }
+            } else if (grid[2][0] == grid[1][1] && grid[1][1] == grid[0][2]) {
+                if (grid[2][0] == 'x') {
+                    result = xWins;
+                } else if (grid[2][0] == 'o') {
+                    result = oWins;
+                }
+            } else if (freeSpots == 0) {
+                result = tie;
             }
-        } else if (grid[0][1]==grid[1][1]&&grid[1][1]==grid[2][1]) {
-            if(grid[0][1] == 'x'){
-                result = xWins;
-            } else if(grid[0][1] == 'o'){
-                result = oWins;
-            }
-        } else if (grid[0][2]==grid[1][2]&&grid[1][2]==grid[2][2]) {
-            if (grid[0][2] == 'x') {
-                result = xWins;
-            } else if (grid[0][2] == 'o') {
-                result = oWins;
-            }
-        } else if (grid[0][0]==grid[0][1]&&grid[0][1]==grid[0][2]) {
-            if (grid[0][0] == 'x') {
-                result = xWins;
-            } else if (grid[0][0] == 'o') {
-                result = oWins;
-            }
-        } else if (grid[1][0]==grid[1][1]&&grid[1][1]==grid[1][2]){
-            if (grid[1][0] == 'x') {
-                result = xWins;
-            } else if (grid[1][0] == 'o') {
-                result = oWins;
-            }
-        } else if (grid[2][0]==grid[2][1]&&grid[2][1]==grid[2][2]) {
-            if (grid[2][0] == 'x') {
-                result = xWins;
-            } else if (grid[2][0] == 'o') {
-                result = oWins;
-            }
-        } else if (grid[0][0]==grid[1][1]&&grid[1][1]==grid[2][2]) {
-            if (grid[0][0] == 'x') {
-                result = xWins;
-            } else if (grid[0][0] == 'o') {
-                result = oWins;
-            }
-        } else if (grid[2][0]==grid[1][1]&&grid[1][1]==grid[0][2]) {
-            if (grid[2][0] == 'x') {
-            result = xWins;
-            } else if (grid[2][0] == 'o') {
-            result = oWins;
-            }
-        } else if (freeSpots == 0) {
-            result = tie;
         }
 
         return result;
