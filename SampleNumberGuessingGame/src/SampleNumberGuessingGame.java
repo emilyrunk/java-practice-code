@@ -17,12 +17,11 @@ public class SampleNumberGuessingGame {
             if (randomNumber < guess) {
                 System.out.println("It's smaller than " + guess + ".");
             }
-
-            if (randomNumber > guess) {
+            else if (randomNumber > guess) {
                 System.out.println("It's greater than " + guess + ".");
             }
 
-            if (randomNumber == guess) {
+            else {
                 hasWon = true;
                 break;
             }
