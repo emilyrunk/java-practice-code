@@ -7,44 +7,49 @@ public class GuessTheMovie {
 
     public static void main(String[]args) throws Exception{
 
+        String wrongGuesses = "";
+        int numberOfWrongGuesses = 0;
+        char[] movieToGuess = computerPicksMovie();
+        int length = movieToGuess.length;
+
+
         System.out.println("Guess the movie!");
 
-        char[] wrongGuesses = new char[10];
-        int numberOfWrongGuesses = 0;
-        String movieToGuess = computerPicksMovie();
+        System.out.println(movieToGuess);
 
-        int length = movieToGuess.length();
-
+        //Create word showing only underscores
         char blanks[] = new char[length];
         for (int i = 0; i < length; i++) {
             blanks[i] = '_';
         }
+        //Convert char[] into String so you can print it
+        String stringBlanks = new String(blanks);
+        System.out.println("You are guessing : " + stringBlanks);
 
-        System.out.println("You are guessing : " + blanks);
+        System.out.println("Guess a letter: ");
 
+        //User input is here
         Scanner inputScanner = new Scanner(System.in);
+        char userGuess = inputScanner.nextLine().charAt(0);
 
-
-        while (numberOfWrongGuesses < 10) {
-            String wrongGuessesString = new String(wrongGuesses);
-            System.out.println("You have guessed (" + numberOfWrongGuesses + ") wrong letters: " + wrongGuessesString);
-            System.out.println("Guess a letter: ");
-            String userGuess = inputScanner.ne;
-            //Guess a letter correctly
-            if (movieToGuess.contains(userGuess)) {
-                for (int i = 0; i < movieToGuess.length() ; i++) {
-                    if (movieToGuess.charAt(i) == userGuess)
-                }
+        for (int i = 0; i < length ; i++){
+            if (userGuess == movieToGuess[i]){
+                blanks[i] = userGuess;
+            } else {
+                blanks[i] = '_';
             }
-            //Guess a wrong letter
-            numberOfWrongGuesses++;
         }
+
+        stringBlanks = new String(blanks);
+
+        System.out.println(stringBlanks);
+        
 
 
     }
 
 
-    private static String computerPicksMovie() throws FileNotFoundException {
+    private static char[] computerPicksMovie() throws FileNotFoundException {
 
         int movieIndex = 0;
         String [] listOfMovies = new String[500];
@@ -60,8 +65,7 @@ public class GuessTheMovie {
         }
         int random = (int) (Math.random() * movieIndex) + 1;
 
-        String randomMovie = listOfMovies[random];
-        System.out.println(randomMovie);
+        char[] randomMovie = listOfMovies[random].toCharArray();
 
         return randomMovie;
 
