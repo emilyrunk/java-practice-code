@@ -7,46 +7,66 @@ public class GuessTheMovie {
 
     public static void main(String[]args) throws Exception{
 
-        String wrongGuesses = "";
+        String wrongLetters = "";
         int numberOfWrongGuesses = 0;
         char[] movieToGuess = computerPicksMovie();
-        int length = movieToGuess.length;
+
+        char underscores[] = new char[movieToGuess.length];
+        for (int i = 0; i < movieToGuess.length; i++) {
+            if (movieToGuess[i]== ' '){
+                underscores[i] = ' ';
+            } else {
+                underscores[i] = '_';
+            }
+        }
+
 
 
         System.out.println("Guess the movie!");
 
         System.out.println(movieToGuess);
 
-        //Create word showing only underscores
-        char blanks[] = new char[length];
-        for (int i = 0; i < length; i++) {
-            blanks[i] = '_';
-        }
+        String tempStringBlanks;
+
+
         //Convert char[] into String so you can print it
-        String stringBlanks = new String(blanks);
+        String stringBlanks = new String(underscores);
         System.out.println("You are guessing : " + stringBlanks);
 
-        System.out.println("Guess a letter: ");
+
 
         //User input is here
+        System.out.println("Guess a letter: ");
         Scanner inputScanner = new Scanner(System.in);
         char userGuess = inputScanner.nextLine().charAt(0);
 
-        for (int i = 0; i < length ; i++){
+
+        //Check if guessed letter is in movie name, change underscores to correct letter guessed
+        for (int i = 0; i < movieToGuess.length ; i++){
             if (userGuess == movieToGuess[i]){
-                blanks[i] = userGuess;
-            } else {
-                blanks[i] = '_';
+                underscores[i] = userGuess;
             }
         }
+        tempStringBlanks = new String(underscores);
 
-        stringBlanks = new String(blanks);
+
+        //Check to see if new string is same as previous string (was the letter guess right or wrong?
+        if (tempStringBlanks == stringBlanks){
+            //wrong guess
+            numberOfWrongGuesses++;
+        } else {
+            //right guess
+            stringBlanks = tempStringBlanks;
+        }
 
         System.out.println(stringBlanks);
-        
+
 
 
     }
+
+
+
 
 
     private static char[] computerPicksMovie() throws FileNotFoundException {
