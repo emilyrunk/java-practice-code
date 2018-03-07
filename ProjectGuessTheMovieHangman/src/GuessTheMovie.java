@@ -7,8 +7,25 @@ public class GuessTheMovie {
 
     private char[] gameboard;
     private char[] movieToGuess;
-    private int remainingGuesses = 10;
     private int underscoresLeft = 0;
+    private String wrongLetters = "";
+    private int numberOfWrongGuesses = 0;
+
+
+    /*
+    Starts the game!
+     */
+    public void startGame() throws Exception{
+        init();
+        printStartMessage();
+
+        while (!gameOver()) {
+            runTurn();
+        }
+
+    }
+
+
 
 
     /*
@@ -31,31 +48,24 @@ public class GuessTheMovie {
 
 
     }
-
     /*
-    Starts the game!
+    Prints out the initial welcome message
      */
-    public void startGame() throws Exception{
-        init();
-        printInitial();
 
-        while (!gameOver()) {
-            runTurn();
-        }
+    public void printStartMessage() {
+        System.out.println("Guess the movie!");
 
+        System.out.println(movieToGuess);
+
+        System.out.printf("You are guessing : %s \n", ctos(gameboard));
     }
-
-    public void runTurn(){
-
-        char userGuess = receiveUserGuess();
-        checkGuess(userGuess);
-
-
-        System.out.println(ctos(gameboard));
-    }
+    /*
+    Defines the game-ending conditions, defaults to false. If it hits either of the 2 ending conditions,
+    gameOver is set to true
+     */
 
     public boolean gameOver() {
-        if(remainingGuesses == 0) {
+        if(numberOfWrongGuesses == 10) {
             System.out.println("Game over because remaining guesses = 0");
 
             return true;
@@ -67,43 +77,46 @@ public class GuessTheMovie {
         return false;
     }
 
+    public void runTurn(){
 
-    public void printInitial() {
-        System.out.println("Guess the movie!");
+        System.out.println("You have guessed (" + numberOfWrongGuesses + ") wrong letters: " + wrongLetters);
+        char userGuess = receiveUserGuess();
+        checkGuess(userGuess);
 
-        System.out.println(movieToGuess);
-
-        //Convert char[] into String so you can print it
-//        stringBlanks = new String(gameboard);
-        System.out.printf("You are guessing : %s \n", ctos(gameboard));
+        System.out.println(ctos(gameboard));
     }
 
-    public static String ctos(char[] c){
-        return new String(c);
-    }
 
     public void checkGuess(char ug) {
         int tempUnderscoresLeft = 0;
         //Check if guessed letter is in movie name, change underscores to correct letter guessed
+        //GUESS CORRECTLY
         for (int i = 0; i < movieToGuess.length ; i++){
             if (ug == movieToGuess[i]){
                 gameboard[i] = ug;
-
             } else if (gameboard[i]=='_'){
                 tempUnderscoresLeft++;
             }
         }
         if(tempUnderscoresLeft == underscoresLeft) {
-            remainingGuesses--;
+            //WRONG GUESS
+            wrongLetters += ug;
+            numberOfWrongGuesses++;
         }
+
         underscoresLeft = tempUnderscoresLeft;
     }
 
     public char receiveUserGuess() {
         //User input is here
-        System.out.printf("Guess a letter: (You have %d tries left)\n",remainingGuesses);
+        System.out.println("Guess a letter:");
         Scanner inputScanner = new Scanner(System.in);
-        return inputScanner.nextLine().charAt(0);
+        char userInput = inputScanner.nextLine().charAt(0);
+        while (!Character.isLetter(userInput)) {
+            System.out.println("Your guess is invalid. Try again: ");
+            userInput = inputScanner.nextLine().charAt(0);
+        }
+        return userInput;
     }
 
     private static char[] computerPicksMovie() throws FileNotFoundException {
@@ -126,5 +139,13 @@ public class GuessTheMovie {
 
     }
 
+
+    /*
+    Converts char Array into String
+     */
+
+    public static String ctos(char[] c){
+        return new String(c);
+    }
 
 }
