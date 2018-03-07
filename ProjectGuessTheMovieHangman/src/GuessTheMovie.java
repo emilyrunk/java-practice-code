@@ -52,9 +52,6 @@ public class GuessTheMovie {
 
     public void printStartMessage() {
         System.out.println("Guess the movie!");
-
-        System.out.println(movieToGuess);
-
         System.out.printf("You are guessing : %s \n", ctos(gameboard));
     }
     /*
