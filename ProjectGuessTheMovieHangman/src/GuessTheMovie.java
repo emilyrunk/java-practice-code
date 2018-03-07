@@ -26,8 +26,6 @@ public class GuessTheMovie {
     }
 
 
-
-
     /*
     Initializes a movie picked from the list of movies and a blank gameboard that reflects the movie's
     letter order and spaces
@@ -67,7 +65,6 @@ public class GuessTheMovie {
     public boolean gameOver() {
         if(numberOfWrongGuesses == 10) {
             System.out.println("Game over because remaining guesses = 0");
-
             return true;
         }
         if(underscoresLeft == 0){
@@ -87,6 +84,13 @@ public class GuessTheMovie {
     }
 
 
+
+    /*
+    Checks to see if the user's guess is in the movie name, changing the underscores to include the user's guess,
+    and counting up the number of underscores. If the underscores does not change from before the user's guess, means
+    the user guess was wrong. In this case, add to number of wrong guesses, and add the user's guess to the list
+    of letters guessed incorrectly.
+     */
     public void checkGuess(char ug) {
         int tempUnderscoresLeft = 0;
         //Check if guessed letter is in movie name, change underscores to correct letter guessed
@@ -103,20 +107,44 @@ public class GuessTheMovie {
             wrongLetters += ug;
             numberOfWrongGuesses++;
         }
-
         underscoresLeft = tempUnderscoresLeft;
     }
 
+
+    /*
+    With the user's guess, make make sure it is a letter (not symbol, space or number).
+    If it's not a letter, prompt the user to input it again, printing out an error message.
+     */
     public char receiveUserGuess() {
-        //User input is here
+
         System.out.println("Guess a letter:");
+        char userChar;
+        while (true) {
+            userChar = getUserChar();
+            if (Character.isLetter(userChar)) {
+                break;
+            }
+            guessErrorMessage();
+        }
+
+        return userChar;
+    }
+
+    /*
+    Calls for the user's guess, making sure it's not empty, returning a character
+     */
+    private static char getUserChar() {
         Scanner inputScanner = new Scanner(System.in);
-        char userInput = inputScanner.nextLine().charAt(0);
-        while (!Character.isLetter(userInput)) {
-            System.out.println("Your guess is invalid. Try again: ");
-            userInput = inputScanner.nextLine().charAt(0);
+        char userInput = 13;
+        String nextLine = inputScanner.nextLine();
+        if(!nextLine.isEmpty()) {
+            userInput = nextLine.charAt(0);
         }
         return userInput;
+    }
+
+    private static void guessErrorMessage(){
+        System.out.println("Your guess is invalid. Try again: ");
     }
 
     private static char[] computerPicksMovie() throws FileNotFoundException {
