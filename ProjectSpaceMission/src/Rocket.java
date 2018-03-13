@@ -1,4 +1,13 @@
 public class Rocket implements SpaceShip {
+
+    int cost;
+    int weight;
+    int maxWeight;
+    double launchFailPercent;
+    double landFailPercent;
+
+
+
     @Override
     public boolean launch() {
         return true;
@@ -10,14 +19,15 @@ public class Rocket implements SpaceShip {
     }
 
     @Override
-    public boolean canCarry() {
-        //Todo: implement class here, not overridden in U1
+    public boolean canCarry(Item i) {
+        if((weight + i.weight) < maxWeight){
+            return true;
+        }
         return false;
     }
 
     @Override
     public void carry(Item i) {
-        //Todo: implement class here, not overridden in U1
-
+        weight += i.weight;
     }
 }
