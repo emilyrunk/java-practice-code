@@ -1,16 +1,26 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Main {
 
 
     public static void main(String[] args ){
+//
+//        U1 rocket = new U1();
+//        Item item1 = new Item();
+//        item1.name = "habitat";
+//        item1.weight = 3000;
+//
+//        System.out.println(rocket.canCarry(item1));
+//
+//        System.out.println("success? : " + rocket.launch());
 
-        U1 rocket = new U1();
-        Item item1 = new Item();
-        item1.name = "habitat";
-        item1.weight = 3000;
+        Simulation sim = new Simulation();
+        ArrayList<Item> listOfItems = sim.loadItems(sim.phase1);
+        for (Item item:listOfItems) {
+            System.out.println(item);
+        }
 
-        System.out.println(rocket.canCarry(item1));
-
-        System.out.println("success? : " + rocket.launch());
 
 
     }
