@@ -1,8 +1,8 @@
 public class Rocket implements SpaceShip {
 
     int cost;
-    int weight;
-    int maxWeight;
+    double weight;
+    double maxWeight;
     double launchFailPercent;
     double landFailPercent;
 
@@ -10,11 +10,32 @@ public class Rocket implements SpaceShip {
 
     @Override
     public boolean launch() {
+        double variablePercentage = (double) (weight/maxWeight);
+        System.out.println("Variable Percentage: " + variablePercentage);
+
+        double launchExplosionRate = launchFailPercent * variablePercentage;
+        System.out.println("Launch Explosion Rate: " + launchExplosionRate);
+
+        double explosionRoll = Math.random();
+        System.out.println("Random Explosion Roll: " + explosionRoll);
+
+        if(explosionRoll <= launchExplosionRate) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public boolean land() {
+        double variablPercentage = (double) (weight/maxWeight);
+
+        double landingExplosionRate = landFailPercent * variablPercentage;
+
+        double explosionRoll = Math.random();
+
+        if(explosionRoll <= landingExplosionRate) {
+            return false;
+        }
         return true;
     }
 
