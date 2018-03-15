@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Simulation {
@@ -9,8 +11,6 @@ public class Simulation {
 
 
     public ArrayList<Item> loadItems(File phaseFileName){
-        //Todo: should load all items from text file and return ArrayList of Items,
-        //Todo: Should create an Item object out of all the items in list
 
         ArrayList<Item> listOfItems = new ArrayList<>();
         try {
@@ -35,7 +35,25 @@ public class Simulation {
     public ArrayList<U1> loadU1(ArrayList<Item> listOfItems ){
         //Todo: fill up 1 U1 rocket with as many items before creating a new rockets until all items loaded
         //Todo: returns ArrayList of U1 rockets that are fully loaded
+
+        Collections.sort(listOfItems);
         ArrayList<U1> U1Loads = new ArrayList<U1>();
+        while(!listOfItems.isEmpty()) {
+            ArrayList<Item> copyList = new ArrayList<Item>(listOfItems);
+            U1 rocket = new U1();
+            for (Item item: copyList) {
+                System.out.println(item.weight);
+                //If the rocket can carry the item, then carry it and remove it from the list of items to be loaded
+                if (rocket.canCarry(item)) {
+                    rocket.carry(item);
+
+                    listOfItems.remove(item);
+                }
+            }
+            U1Loads.add(rocket);
+
+        }
+
         return U1Loads;
     }
 
@@ -45,4 +63,11 @@ public class Simulation {
         ArrayList<U2> U2Loads = new ArrayList<U2>();
         return U2Loads;
     }
+
+    public int runSimulation(ArrayList<Rocket> listOfRockets) {
+        int rocketCost = 0;
+        return rocketCost;
+    }
+
+
 }

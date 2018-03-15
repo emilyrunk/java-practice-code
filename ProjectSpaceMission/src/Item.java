@@ -1,4 +1,4 @@
-public class Item {
+public class Item implements Comparable{
     String name;
     int weight;
 
@@ -9,4 +9,11 @@ public class Item {
     }
 
 
+
+    @Override
+    public int compareTo(Object o) {
+        int compareWeight = ((Item)o).weight;
+
+        return (compareWeight - this.weight);
+    }
 }
