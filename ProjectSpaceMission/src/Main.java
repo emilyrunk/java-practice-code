@@ -18,8 +18,10 @@ public class Main {
         Simulation sim = new Simulation();
         ArrayList<Item> listOfItems = sim.loadItems(sim.phase1);
         ArrayList<U1> U1List = sim.loadU1(listOfItems);
+        ArrayList<Rocket> U1RocketList = new ArrayList<Rocket>(U1List);
 
         System.out.println(U1List.size());
+        sim.runSimulation(U1RocketList);
 
 //        for (Item item:listOfItems) {
 //            System.out.println(item.toString());
