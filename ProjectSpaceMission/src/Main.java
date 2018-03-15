@@ -18,7 +18,7 @@ public class Main {
         Simulation sim = new Simulation();
         ArrayList<Item> listOfItems = sim.loadItems(sim.phase1);
         for (Item item:listOfItems) {
-            System.out.println(item);
+            System.out.println(item.toString());
         }
 
 

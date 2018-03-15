@@ -11,7 +11,7 @@ public class Simulation {
     public ArrayList<Item> loadItems(File phaseFileName){
         //Todo: should load all items from text file and return ArrayList of Items,
         //Todo: Should create an Item object out of all the items in list
-        Item item = new Item();
+
         ArrayList<Item> listOfItems = new ArrayList<>();
         try {
             Scanner fileScanner = new Scanner(phaseFileName);
@@ -20,6 +20,7 @@ public class Simulation {
                 String[] parts = line.split("=");
                 String itemName = parts[0];
                 String itemWeight = parts[1];
+                Item item = new Item();
                 item.name = itemName;
                 item.weight = Integer.parseInt(itemWeight);
                 listOfItems.add(item);
