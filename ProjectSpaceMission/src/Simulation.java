@@ -52,13 +52,28 @@ public class Simulation {
     }
 
     public ArrayList<U2> loadU2(ArrayList<Item> listOfItems ){
-
-
-
-        //Todo: fill up 1 U1 rocket with as many items before creating a new rockets until all items loaded
-        //Todo: returns ArrayList of U1 rockets that are fully loaded
+        Collections.sort(listOfItems); //Sort the ArrayList so that items are descending by weight
         ArrayList<U2> U2Loads = new ArrayList<U2>();
-        return U2Loads;
+        while(!listOfItems.isEmpty()) { //While listOfItems has items in it
+
+            //Make a copy of the listOfItems to be loaded so it can be used to iterate the loop
+            ArrayList<Item> copyList = new ArrayList<Item>(listOfItems);
+
+            U2 rocket = new U2(); //Create a new rocket
+            //For every item in the iterable list of items, if the rocket can carry the weight,
+            //carry it and remove it from the list of items
+            for (Item item: copyList) {
+                //If the rocket can carry the item, then carry it and remove it from the list of items to be loaded
+                if (rocket.canCarry(item)) {
+                    rocket.carry(item);
+                    listOfItems.remove(item);
+                }
+            } //Loop until every item is removed from listofitems
+            //Add the loaded rocket to the list of loaded rockets
+            U2Loads.add(rocket);
+        }
+
+        return U2Loads; //Number of loaded U2 rockets
     }
 
     public int runSimulation(ArrayList<Rocket> listOfRockets) {
