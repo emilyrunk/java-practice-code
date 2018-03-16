@@ -8,11 +8,6 @@ public class U1 extends Rocket{
         landFailPercent = 0.01;
     }
 
-    @Override
-    public boolean land() {
-        //Todo: Return true based on probability of success
-        return super.land();
-    }
 
 
 }

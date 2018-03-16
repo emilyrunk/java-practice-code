@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Simulation {
+    public static final String ROCKETTYPEU1 = "U1";
+    public static final String ROCKETTYPEU2 = "U2";
+    public static final String PHASE1 = "phase1";
+    public static final String PHASE2 = "phase2";
+
     File phase1 = new File("phase-1.txt");
     File phase2 = new File("phase-2.txt");
 
@@ -87,9 +92,7 @@ public class Simulation {
             while (!rocket.launch()) {
                 rocketCount ++;
                 System.out.println("RocketLaunch Failed. rocket count = " + rocketCount);
-
             }
-
             while (!rocket.land()) {
                 rocketCount ++;
                 System.out.println("RocketLanding Failed. rocket count = " + rocketCount);
@@ -105,6 +108,30 @@ public class Simulation {
         System.out.println("Total Rocket Cost = " + rocketCost);
         return rocketCost;
     }
+
+    public int runCostSimulation(String rocketType, String phase){
+        ArrayList<Item> listOfItems = new ArrayList<Item>();
+        if(phase.equals("phase1")) {
+            listOfItems = this.loadItems(this.phase1);
+        }else if(phase.equals("phase2")) {
+            listOfItems = this.loadItems(this.phase2);
+        }
+        int rocketCost = 0;
+
+        if (rocketType.equals("U1")) {
+            ArrayList<U1>list = this.loadU1(listOfItems);
+            ArrayList<Rocket> U1RocketList = new ArrayList<Rocket>(list);
+            rocketCost =  this.runSimulation(U1RocketList);
+        } else if(rocketType.equals("U2")) {
+            ArrayList<U2> list = this.loadU2(listOfItems);
+            ArrayList<Rocket> U2RocketList = new ArrayList<Rocket>(list);
+            rocketCost = this.runSimulation(U2RocketList);
+        }
+
+        return rocketCost;
+
+    }
+
 
 
 
