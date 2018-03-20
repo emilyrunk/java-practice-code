@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class Simulation {
@@ -89,14 +88,11 @@ public class Simulation {
             rocketCount++;
             System.out.println("*****Initalize rocket. rocket count = " + rocketCount);
 
-            while (!rocket.launch()) {
+            while ((!rocket.launch()) || (!rocket.land())) {
                 rocketCount ++;
-                System.out.println("RocketLaunch Failed. rocket count = " + rocketCount);
+                System.out.println("Rocket Launch or Landing Failed. rocket count = " + rocketCount);
             }
-            while (!rocket.land()) {
-                rocketCount ++;
-                System.out.println("RocketLanding Failed. rocket count = " + rocketCount);
-            }
+
         }
 
 
@@ -116,6 +112,7 @@ public class Simulation {
         }else if(phase.equals("phase2")) {
             listOfItems = this.loadItems(this.phase2);
         }
+
         int rocketCost = 0;
 
         if (rocketType.equals("U1")) {
