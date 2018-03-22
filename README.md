@@ -2,7 +2,7 @@
 
 Consists of small projects while going through basic Udacity Java tutorial.
 
-Illustrates examples of:
+### Illustrates examples of:
 - data types
 - control flow & conditionals
 - methods/functions
@@ -24,4 +24,7 @@ Illustrates examples of:
     - file scanner
 - errors
 
-Includes my solution for the class project, Project Space Mission.
+### Includes my personal solution for:
+- Tic Tac Toe 
+- Guess the Movie Hangman Game
+- Space Mission Final Project (U1 Rockets vs U2 Rockets)
